@@ -1,0 +1,79 @@
+:root {
+    --color-primary: #12608a;
+    --color-secundary: #1f90cd;
+    --color-terciary: #47b8f5;
+    --color-info: #606d73;
+    --color-text: darkslategray;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+    --border-radius: 8px;
+    --primary-bg-color: #c6dbff86;
+    --border: 1px solid #c6dbff86;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --primary-bg-color: #c6dbffbd;
+    --principal-cont: rgba(255, 255, 255, 0.5);
+    --card: linear-gradient(
+        rgba(106, 182, 214, 0.8),  /* #6ab6d6 con 80% opacidad */
+        rgba(21, 122, 165, 0.8)     /* #157aa5 con 80% opacidad */
+    );
+}
+
+/* Reset global y full-screen para React */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos base opcionales */
+body {
+  background-color: var(--primary-bg-color);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               Roboto, Oxygen, Ubuntu, Cantarell,
+               'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--primary-bg-color);
+    color: var(--color-text);
+  }
+}
+
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+
