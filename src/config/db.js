@@ -1,28 +1,19 @@
 const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  process.env.DB_PASSWORD.replace(/"/g, ''), // Elimina comillas si existen
   {
-    host: process.env.DB_HOST,    // 192.168.1.193
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mssql',
-    port: 1433,
     dialectOptions: {
       options: {
-        encrypt: true,
-        trustServerCertificate: true,
-        // 👇 Agrega estas líneas:
-        useUTC: false,
-        dateFirst: 1
+        encrypt: true, // Para Azure, puedes poner false si no usas Azure
+        trustServerCertificate: true // Para desarrollo local
       }
-    },
-    // 👇 Agrega esta configuración:
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
     },
     logging: false
   }
