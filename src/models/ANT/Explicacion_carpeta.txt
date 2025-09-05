@@ -1,0 +1,1 @@
+Esta carpeta sirve para represnetar las tablas que se establecen en la base de datos

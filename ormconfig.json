@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "tu_usuario",
+    "password": "tu_contraseña",
+    "database": "callcenter_db",
+    "entities": ["src/entities/*.ts"],
+    "synchronize": true
+  }
