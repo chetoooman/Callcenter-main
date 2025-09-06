@@ -1,31 +1,32 @@
-require('dotenv').config();
 const express = require('express');
-const helmet = require('helmet');
 const cors = require('cors');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const authRouter = require('./src/routes/authRoutes');
-const { sequelize } = require('./src/config/db');
+const sequelize = require('./config/db');
+
+require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-//Seguridad y utilidades
-app.use(helmet());
-app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
-app.use(rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-    max: 100 // Limitar a 100 solicitudes por IP
-}));
+app.use(cors());
 
-// Conectar a la base de datos
-sequelize.sync({alter: true}).then(() => {
-    console.log('Conexión a la base de datos establecida correctamente');
-    app.listen(PORT, () => {
-        console.log(`Servidor corriendo en http://localhost:${PORT}`);
-    });
-}).catch((error) => {
-    console.error('Error al conectar a la base de datos:', error);
-});
+// Importar modelos y asociaciones
+const db = require('./src/models/associations');
+
+// Rutas
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
+// Conectar BD
+sequelize.authenticate()
+  .then(() => console.log('✅ Conectado a SQL Server'))
+  .catch(err => console.error('❌ Error de conexión:', err));
+
+// Sincronizar modelos
+sequelize.sync({ alter: true })
+  .then(() => console.log('📦 Modelos sincronizados'))
+  .catch(err => console.error('❌ Error al sincronizar modelos:', err));
+
+// Levantar servidor
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
+
+module.exports = app; // opcional si haces testing

@@ -20,9 +20,8 @@ const User = sequelize.define('User', {
     },
     username: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
+        allowNull: false
+        },
     password: {
         type: DataTypes.STRING,
         allowNull: false
@@ -60,9 +59,11 @@ const User = sequelize.define('User', {
         allowNull: false,
         defaultValue: DataTypes.NOW
     }
-}, {hooks: {
-    beforeCreate: beforeCreateUser
+}, {
+    hooks: {
+        beforeCreate: beforeCreateUser
     },
+    tableName: 'users', // <-- fuerza el nombre exacto de la tabla
     timestamps: true,
 });
 

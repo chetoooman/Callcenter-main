@@ -1,28 +1,21 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
+
+console.log('DB_HOST:', process.env.DB_HOST); // Verifica que la IP se imprime correctamente
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST,    // 192.168.1.193
+    host: process.env.DB_HOST, // <-- debe ser 'host'
     dialect: 'mssql',
-    port: 1433,
+    port: process.env.DB_PORT,
     dialectOptions: {
       options: {
         encrypt: true,
         trustServerCertificate: true,
-        // 👇 Agrega estas líneas:
-        useUTC: false,
-        dateFirst: 1
       }
-    },
-    // 👇 Agrega esta configuración:
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
     },
     logging: false
   }
